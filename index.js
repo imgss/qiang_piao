@@ -34,10 +34,11 @@ const day = '13';
   //循环查询
   setInterval(async () => {
     await page.tap('#query_ticket');
-    let tra = await page.$('tr[datatran="K1102"]')
+    await page.waitForSelector('tr[datatran]');
+    let tra = await page.$('tr[datatran]')
     console.log(tra && tra.id)
     let tr = await page.evaluate(() => {
-      let train  = document.querySelector("[datatran=\"K1102\"]") 
+      var train  = document.querySelector("[datatran=\"K1102\"]") 
       console.log(train)
       if(train){
         let tr = document.querySelector('#'+document.querySelector("[datatran=\"K1102\"]").id.replace('price','ticket'))//查出k1102所在的行
