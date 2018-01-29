@@ -38,7 +38,7 @@ const day = '17';
   //查找车次，席位，是否可预订
   //循环查询
   console.log('开始循环查询');
-  setInterval(async () => {
+  let timer = setInterval(async () => {
     await page.tap('#query_ticket');
     await page.waitForSelector('tr[datatran]');
     let tra = await page.$('[datatran="K1102"]');
@@ -57,5 +57,10 @@ const day = '17';
     // console.log('暂无余票',tr)
   }, 3000)
 
+  await page.waitForNavigation({
+    waitUntil: 'load'
+  })
+  clearInterval(timer)
+  await page.tap('#normalPassenger_0')
   // await browser.close();
 })();
