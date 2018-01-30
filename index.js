@@ -1,7 +1,7 @@
 
 const puppeteer = require('puppeteer');
 const month = '二月';
-const day = '17';
+const day = '13';
 (async () => {
   const browser = await puppeteer.launch({headless:false});
   const page = await browser.newPage();
@@ -57,10 +57,10 @@ const day = '17';
     // console.log('暂无余票',tr)
   }, 3000)
 
-  await page.waitForNavigation({
-    waitUntil: 'load'
+  page.on('load',async () => {
+    clearInterval(timer)
+    await page.tap('#normalPassenger_0')
   })
-  clearInterval(timer)
-  await page.tap('#normalPassenger_0')
+
   // await browser.close();
 })();
